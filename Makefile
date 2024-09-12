@@ -24,7 +24,7 @@ OBJ_FILES = $(SRC_FILES:.cpp=.o)
 # Target: the program name is now taken from the config file
 TARGET = $(BIN_DIR)/$(PROGRAM_NAME)
 
-# Default target
+# Default target: build the program
 all: $(TARGET)
 
 # Linking the target
@@ -43,5 +43,13 @@ $(BIN_DIR):
 clean:
 	rm -rf $(OBJ_FILES) $(TARGET)
 
+# Format: format all C++ files in src and include directories
+format:
+	clang-format -i $(SRC_FILES) $(wildcard $(INCLUDE_DIR)/*.h)
+
+# Test: compile and run the code directly without building an output file
+test:
+	$(CXX) $(CXXFLAGS) $(SRC_FILES) -o /dev/null && ./$(TARGET)
+
 # Phony targets
-.PHONY: all clean
+.PHONY: all clean format tes
