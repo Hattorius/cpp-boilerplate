@@ -45,7 +45,7 @@ clean:
 
 # Format: format all C++ files in src and include directories
 format:
-	clang-format -i $(SRC_FILES) $(wildcard $(INCLUDE_DIR)/*.h)
+	clang-format -i $(filter %.cpp,$(SRC_FILES)) $(filter %.c,$(SRC_FILES)) $(wildcard $(INCLUDE_DIR)/**/*.h)
 
 # Test: compile and run the code directly without building an output file
 test: $(TARGET)
